@@ -36,24 +36,13 @@
     $.jforrst = {};
 
     var jsonpGET = function (path, args) {
-
         $.ajax({
             type: 'GET',
             url: 'https://forrst.com/api/v2' + path,
+            data: args[1] || {},
             dataType: 'jsonp',
             success: function (data) {
-
-              alert(path);
-                if (typeof (data) === 'undefined') {
-                    args[0]({error: true});
-                  
-
-                }
-                else {
-                    
-                    args[0](data);
-                 
-                }
+                 args[0](data);
             }
         });
     };
@@ -68,11 +57,8 @@
 
     var createAPIMethod = function (urlPattern) {
         return function () {
-            var // Convert arguments to a real Array
+            var 
                 args = [].slice.call(arguments),
-
-                // We run shift() on args here because we don't need to send
-                // the first argument to jsonpGET.
                 url = urlPattern.replace('$', args.shift());
             jsonpGET(url,args);
 
