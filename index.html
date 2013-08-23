@@ -1,37 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <title>Jforrst by IvanSotelo</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>Jforrst by IvanSotelo</title>
   </head>
-
   <body>
-    <div id="container">
-      <div class="inner">
+    <div class="wrapper">
+      <header>
+        <h1>Jforrst</h1>
+        <p>Plugin JQuery</p>
 
-        <header>
-          <h1>Jforrst</h1>
-          <h2>Plugin JQuery</h2>
-        </header>
+        <p class="view"><a href="https://github.com/IvanSotelo/JForrst">View the Project on GitHub <small>IvanSotelo/JForrst</small></a></p>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/IvanSotelo/JForrst/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/IvanSotelo/JForrst/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/IvanSotelo/JForrst" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
 
-        <hr>
-
-        <section id="main_content">
-          <h1>
+        <ul>
+          <li><a href="https://github.com/IvanSotelo/JForrst/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/IvanSotelo/JForrst/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/IvanSotelo/JForrst">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
 <a name="jforrst" class="anchor" href="#jforrst"><span class="octicon octicon-link"></span></a>JForrst</h1>
 
 <p>A jQuery plugin to fetch post and user info from the Forrst API</p>
@@ -44,10 +41,37 @@
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>JForrst makes available methods for retrieving shot and player information from the Forrst.com API. All the available methods are accessed from the JForrst object which is a member of the jQuery or $ object.</p>
+<p>JForrst makes available methods for retrieving post and user information from the Forrst.com API. All the available methods are accessed from the JForrst object which is a member of the jQuery or $ object.</p>
 
 <h3>
-<a name="get-a-post" class="anchor" href="#get-a-post"><span class="octicon octicon-link"></span></a>Get a Post</h3>
+<a name="get-user-info" class="anchor" href="#get-user-info"><span class="octicon octicon-link"></span></a>Get User info</h3>
+
+<p>$.jforrst.getUserInfo(username, callback)</p>
+
+<p><strong>Parameters</strong></p>
+
+<ul>
+<li>&gt; username string.</li>
+<li>&gt; callback FUNC Function to call once the request has completed successfully. One parameter will be passed containing the JSON response of the request; callback(data).</li>
+</ul><p><strong>Example</strong></p>
+
+<pre><code>$.jforrst.getUserInfo("IvanSotelo", function(data){
+    var html = [];
+
+    html.push('&lt;a href="' + data.resp.url + '"&gt;&lt;img src="' +  data.resp.photos.large_url + '" alt=""&gt;&lt;/a&gt;');
+    html.push('&lt;div&gt;&lt;h3&gt;' + data.resp.name + '&lt;/h3&gt;');
+    html.push('&lt;h4&gt;&lt;a href="' + data.resp.url + '"&gt;' + data.resp.url + '&lt;/a&gt;&lt;/h4&gt;');
+    html.push('&lt;ul&gt;&lt;li&gt;&lt;b&gt;Posts: &lt;/b&gt;' + data.resp.posts + '&lt;/li&gt;');
+    html.push('&lt;li&gt;&lt;b&gt;Following: &lt;/b&gt;' +  data.resp.following + '&lt;/li&gt;');
+    html.push('&lt;li&gt;&lt;b&gt;Followers: &lt;/b&gt;' +  data.resp.followers + '&lt;/li&gt;');
+    html.push('&lt;li&gt;&lt;b&gt;Likes: &lt;/b&gt;' +  data.resp.likes + '&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;');
+
+    $('#userInfo').html(html.join(''));
+                });    
+</code></pre>
+
+<h3>
+<a name="get-a-user-posts" class="anchor" href="#get-a-user-posts"><span class="octicon octicon-link"></span></a>Get a User Posts</h3>
 
 <p>$.jforrst.getUserPosts(username, callback)</p>
 
@@ -74,15 +98,98 @@
                 }, {page: 1, per_page: 8
                 });    
 </code></pre>
-        </section>
 
-        <footer>
-          Jforrst is maintained by <a href="https://github.com/IvanSotelo">IvanSotelo</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
+<h3>
+<a name="get-a-post" class="anchor" href="#get-a-post"><span class="octicon octicon-link"></span></a>Get a Post</h3>
 
-        
-      </div>
+<p>$.jforrst.getPostsShow(postId, callback)</p>
+
+<p><strong>Parameters</strong></p>
+
+<ul>
+<li>&gt; postId INT The id of the post.</li>
+<li>&gt; callback FUNC Function to call once the request has completed successfully. One parameter will be passed containing the JSON response of the request; callback(data).</li>
+</ul><p><strong>Example</strong></p>
+
+<pre><code>$.jforrst.getPostsShow(161803, function(data){
+    var html = [];
+
+    $('#postById a:first').attr('href', data.resp.post_url);
+    $('#postById img').attr('src', data.resp.multiposts[1].snaps.mega_url);
+    $('#postById h3').text(data.resp.title);
+    $('#postById h4').html('by &lt;a href="' + data.resp.user.url + '"&gt;' + data.resp.puser.name + '&lt;/a&gt;');
+
+    html.push('&lt;li&gt;&lt;b&gt;Views:&lt;/b&gt; ' + data.resp.view_count + '&lt;/li&gt;');
+    html.push('&lt;li&gt;&lt;b&gt;Likes:&lt;/b&gt; ' + data.resp.like_count + '&lt;/li&gt;');
+    html.push('&lt;li&gt;&lt;b&gt;Comments:&lt;/b&gt; ' + data.resp.comment_count + '&lt;/li&gt;');
+
+    $('#postById ul').html(html.join(''));
+                });    
+</code></pre>
+
+<h3>
+<a name="get-all-posts" class="anchor" href="#get-all-posts"><span class="octicon octicon-link"></span></a>Get all Posts</h3>
+
+<p>$.jforrst.getPostsAll(callback)</p>
+
+<p><strong>Parameters</strong></p>
+
+<ul>
+<li>&gt; callback FUNC Function to call once the request has completed successfully. One parameter will be passed containing the JSON response of the request; callback(data).</li>
+</ul><p><strong>Example</strong></p>
+
+<pre><code>$.jforrst.getPostsAll(function(data){
+    var html = [];
+
+                $.each(data.resp.posts, function (i, posts) {
+                    html.push('&lt;li&gt;');
+                    html.push('&lt;div class="details"&gt;&lt;h3&gt;' + posts.title + '&lt;/h3&gt;');
+                    html.push('&lt;h4&gt;by &lt;a href="' + posts.user.url + '"&gt;' + posts.user.username + '&lt;/a&gt;&lt;/h4&gt;&lt;/div&gt;');
+                    html.push('&lt;a href="' + posts.post_url + '" target="_blank" class="linkc"&gt;');
+                    html.push('&lt;img src="' + posts.multiposts[1].snaps.mega_url + '" alt="' + posts.title + '"&gt;');
+                    html.push('&lt;/a&gt;&lt;/li&gt;');
+                });
+
+                $('#shotsListing').html(html.join(''));
+                }, {page: 1, per_page: 8
+                });    
+</code></pre>
+
+<h3>
+<a name="get-posts-by-list" class="anchor" href="#get-posts-by-list"><span class="octicon octicon-link"></span></a>Get Posts by List</h3>
+
+<p>$.jforrst.getPostsList(postType,callback)</p>
+
+<p><strong>Parameters</strong></p>
+
+<ul>
+<li>&gt; postType STRING Can be one of: "code", "snap", "link", "question"</li>
+<li>&gt; callback FUNC Function to call once the request has completed successfully. One parameter will be passed containing the JSON response of the request; callback(data).</li>
+</ul><p><strong>Example</strong></p>
+
+<pre><code>$.jforrst.getPostsList("snap",function(data){
+    var html = [];
+
+                $.each(data.resp.posts, function (i, posts) {
+                    html.push('&lt;li&gt;');
+                    html.push('&lt;div class="details"&gt;&lt;h3&gt;' + posts.title + '&lt;/h3&gt;');
+                    html.push('&lt;h4&gt;by &lt;a href="' + posts.user.url + '"&gt;' + posts.user.username + '&lt;/a&gt;&lt;/h4&gt;&lt;/div&gt;');
+                    html.push('&lt;a href="' + posts.post_url + '" target="_blank" class="linkc"&gt;');
+                    html.push('&lt;img src="' + posts.multiposts[1].snaps.mega_url + '" alt="' + posts.title + '"&gt;');
+                    html.push('&lt;/a&gt;&lt;/li&gt;');
+                });
+
+                $('#shotsListing').html(html.join(''));
+                }, {page: 1, per_page: 8
+                });    
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/IvanSotelo">IvanSotelo</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
     </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
   </body>
 </html>
