@@ -1,4 +1,5 @@
-# JForrst
+<img src="http://www.deskode.com/Downloads/LOGO.png"  width="30%" height="30%">
+
 A jQuery plugin to fetch post and user info from the Forrst API
 
 ## Dependencies
