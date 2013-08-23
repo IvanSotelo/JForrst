@@ -5,7 +5,7 @@ A jQuery plugin to fetch post and user info from the Forrst API
 For normal usage; jQuery 1.3 or higher.
 
 ## Usage
-JForrst makes available methods for retrieving shot and player information from the Forrst.com API. All the available methods are accessed from the JForrst object which is a member of the jQuery or $ object.
+JForrst makes available methods for retrieving post and user information from the Forrst.com API. All the available methods are accessed from the JForrst object which is a member of the jQuery or $ object.
 
 ### Get User info
 $.jforrst.getUserInfo(username, callback)
@@ -31,7 +31,7 @@ $.jforrst.getUserInfo("IvanSotelo", function(data){
                 });    
 ```
 
-### Get a Posts
+### Get a User Posts
 $.jforrst.getUserPosts(username, callback)
 
 **Parameters**
@@ -79,5 +79,56 @@ $.jforrst.getPostsShow(161803, function(data){
     html.push('<li><b>Comments:</b> ' + data.resp.comment_count + '</li>');
 
     $('#postById ul').html(html.join(''));
+                });    
+```
+
+### Get all Posts
+$.jforrst.getPostsAll(callback)
+
+**Parameters**
+* > callback FUNC Function to call once the request has completed successfully. One parameter will be passed containing the JSON response of the request; callback(data).
+
+**Example**
+```
+$.jforrst.getPostsAll(function(data){
+    var html = [];
+
+                $.each(data.resp.posts, function (i, posts) {
+                    html.push('<li>');
+                    html.push('<div class="details"><h3>' + posts.title + '</h3>');
+                    html.push('<h4>by <a href="' + posts.user.url + '">' + posts.user.username + '</a></h4></div>');
+                    html.push('<a href="' + posts.post_url + '" target="_blank" class="linkc">');
+                    html.push('<img src="' + posts.multiposts[1].snaps.mega_url + '" alt="' + posts.title + '">');
+                    html.push('</a></li>');
+                });
+    
+                $('#shotsListing').html(html.join(''));
+                }, {page: 1, per_page: 8
+                });    
+```
+
+### Get Posts by List
+$.jforrst.getPostsList(postType,callback)
+
+**Parameters**
+* > postType STRING Can be one of: "code", "snap", "link", "question"
+* > callback FUNC Function to call once the request has completed successfully. One parameter will be passed containing the JSON response of the request; callback(data).
+
+**Example**
+```
+$.jforrst.getPostsList("snap",function(data){
+    var html = [];
+
+                $.each(data.resp.posts, function (i, posts) {
+                    html.push('<li>');
+                    html.push('<div class="details"><h3>' + posts.title + '</h3>');
+                    html.push('<h4>by <a href="' + posts.user.url + '">' + posts.user.username + '</a></h4></div>');
+                    html.push('<a href="' + posts.post_url + '" target="_blank" class="linkc">');
+                    html.push('<img src="' + posts.multiposts[1].snaps.mega_url + '" alt="' + posts.title + '">');
+                    html.push('</a></li>');
+                });
+    
+                $('#shotsListing').html(html.join(''));
+                }, {page: 1, per_page: 8
                 });    
 ```
