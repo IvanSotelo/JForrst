@@ -1,6 +1,7 @@
 <img src="http://www.deskode.com/Downloads/LOGO.png"  width="30%" height="30%">
 
-A jQuery plugin to fetch post and user info from the Forrst API
+A jQuery plugin to fetch post and user info from the Forrst API. 
+Visit www.deskode.com
 
 ## Dependencies
 For normal usage; jQuery 1.3 or higher.
